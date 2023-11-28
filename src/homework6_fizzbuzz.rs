@@ -2,7 +2,7 @@ fn main() {
     let upper_bound = 301;
     (0..upper_bound)
         .map(|i| {println!("{}", i); i})
-        .map(|i| fizzbuzz3(i))
+        .map(|i| fizzbuzz2(i))
         .filter(|s| s.is_some())
         .for_each(|s| println!("{}", s.unwrap()));
 
@@ -36,7 +36,7 @@ static FIZZBUZZ_LOOKUP_TABLE: [Option<&'static str>; 15] = [
     None,              // 14
 ];
 
-fn fizzbuzz3(i: i32) -> Option<&'static str> {
+fn fizzbuzz2(i: i32) -> Option<&'static str> {
     FIZZBUZZ_LOOKUP_TABLE[i as usize % 15 ]
 }
 
@@ -67,8 +67,4 @@ mod tests {
         test_fizzbuzz_logic(fizzbuzz2);
     }
 
-    #[test]
-    fn test_fizzbuzz3() {
-        test_fizzbuzz_logic(fizzbuzz3);
-    }
 }
