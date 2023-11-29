@@ -6,3 +6,14 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+
+[dev-dependencies]
+criterion = "0.5.1"
+
+[[bench]]
+name = "fizz_buzz_benches"
+harness = false
+
+[lib]
+name = "fizz_buzz"
+path = "src/homework6_fizzbuzz.rs"
