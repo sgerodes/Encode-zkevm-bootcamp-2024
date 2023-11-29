@@ -9,11 +9,30 @@ fn main() {
     println!("fizz buzz was seen {} times", upper_bound / 15 + 1);
 }
 
-pub fn fizzbuzz_match(i: i32) -> Option<&'static str> {
+pub fn fizz_buzz_match(i: i32) -> Option<&'static str> {
     match (i % 3 == 0, i % 5 == 0) {
         (true, false) => Some("fizz"),
         (false, true) => Some("buzz"),
         (true, true) => Some("fizz buzz"),
+        _ => None
+    }
+}
+
+pub fn fizz_buzz_match_2(i: i32) -> Option<&'static str> {
+    match i {
+        y if y % 3 == 0 && y % 5 == 0 => Some("fizz buzz"),
+        y if y % 3 == 0 => Some("fizz"),
+        y if y % 5 == 0 => Some("buzz"),
+        _ => None
+    }
+}
+
+
+pub fn fizz_buzz_match_3(i: i32) -> Option<&'static str> {
+    match i % 15 {
+        3 | 6 | 9 | 12 => Some("fizz"),
+        5 | 10 => Some("buzz"),
+        0 => Some("fizz buzz"),
         _ => None
     }
 }
@@ -38,15 +57,6 @@ static FIZZBUZZ_LOOKUP_TABLE: [Option<&'static str>; 15] = [
 
 pub fn fizzbuzz_static_lookup_table(i: i32) -> Option<&'static str> {
     FIZZBUZZ_LOOKUP_TABLE[i as usize % 15 ]
-}
-
-pub fn fizz_buzz_match_2(i: i32) -> Option<&'static str> {
-    match i {
-        y if y % 3 == 0 && y % 5 == 0 => Some("fizz buzz"),
-        y if y % 3 == 0 => Some("fizz"),
-        y if y % 5 == 0 => Some("buzz"),
-        _ => None
-    }
 }
 
 
@@ -90,7 +100,7 @@ mod tests {
 
     #[test]
     fn test_fizzbuzz_match() {
-        test_fizzbuzz_logic(fizzbuzz_match);
+        test_fizzbuzz_logic(fizz_buzz_match);
     }
 
     #[test]
@@ -105,6 +115,11 @@ mod tests {
     #[test]
     fn test_fizzbuzz_match_2() {
         test_fizzbuzz_logic(fizz_buzz_match_2);
+    }
+
+    #[test]
+    fn test_fizzbuzz_match_3() {
+        test_fizzbuzz_logic(fizz_buzz_match_3);
     }
 
 }
