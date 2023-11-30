@@ -37,6 +37,34 @@ pub fn fizz_buzz_match_3(i: i32) -> Option<&'static str> {
     }
 }
 
+pub fn fizz_buzz_match_4(i: i32) -> Option<&'static str> {
+    match i % 3 == 0 {
+        true => match i % 5 == 0 {
+            true => Some("fizz buzz"),
+            false => Some("fizz")
+        },
+        false => match i % 5 == 0  {
+            true => Some("buzz"),
+            false => None
+        }
+    }
+}
+
+pub fn fizz_buzz_match_5(i: i32) -> Option<&'static str> {
+    if i % 3 == 0 {
+        return if i % 5 == 0 {
+            Some("fizz buzz")
+        } else {
+            Some("fizz")
+        }
+    } else {
+        if i % 5 == 0 {
+            return Some("buzz");
+        }
+    }
+    None
+}
+
 static FIZZBUZZ_LOOKUP_TABLE: [Option<&'static str>; 15] = [
     Some("fizz buzz"), // 0
     None,              // 1
@@ -112,6 +140,7 @@ mod tests {
     fn test_fizzbuzz_lookup_table() {
         test_fizzbuzz_logic(fizz_buzz_lookup);
     }
+
     #[test]
     fn test_fizzbuzz_match_2() {
         test_fizzbuzz_logic(fizz_buzz_match_2);
@@ -120,6 +149,14 @@ mod tests {
     #[test]
     fn test_fizzbuzz_match_3() {
         test_fizzbuzz_logic(fizz_buzz_match_3);
+    }
+    #[test]
+    fn test_fizzbuzz_match_4() {
+        test_fizzbuzz_logic(fizz_buzz_match_4);
+    }
+    #[test]
+    fn test_fizzbuzz_match_5() {
+        test_fizzbuzz_logic(fizz_buzz_match_5);
     }
 
 }
